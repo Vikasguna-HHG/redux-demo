@@ -1,9 +1,21 @@
-const initialState = 0 ;
-const changeNumber = (state = initialState , action) => {
+import axios from 'axios';
+const initialState = {
+    Data: {}
+}
+
+axios.get('https://lt-fn-cdn001.akamaized.net/common/en/Etc:UTC/cricket/get_scorecard/39497519')
+    .then(function (response) {
+        // handle success
+        initialState.Data = response.data
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+
+const changeNumber = (state = initialState, action) => {
     switch (action.type) {
-        case "INCREMENT" : return state + 1;
-        case "DECREMENT" : return state - 1;
-        default : return state;
+        default: return state;
     }
 }
 export default changeNumber;
